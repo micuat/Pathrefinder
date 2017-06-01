@@ -64,15 +64,15 @@ class State {
       break;
     }
 
-    if(r.tEnd != _r)
+    if (r.tEnd != _r)
       morphs.add(r);
-    if(tx.tEnd != _tx)
+    if (tx.tEnd != _tx)
       morphs.add(tx);
-    if(ty.tEnd != _ty)
+    if (ty.tEnd != _ty)
       morphs.add(ty);
-    if(sx.tEnd != _sx)
+    if (sx.tEnd != _sx)
       morphs.add(sx);
-    if(sy.tEnd != _sy)
+    if (sy.tEnd != _sy)
       morphs.add(sy);
     nextMorph();
   }
@@ -132,7 +132,7 @@ class Dancer {
     vertex(+ s.sx.t, - s.sy.t);
     endShape(CLOSE);
     fill(255);
-    
+
     popMatrix();
   }
 
@@ -145,14 +145,10 @@ class Dancer {
 }
 
 Dancer[] dancers = new Dancer[8];
+boolean isSetup = false;
 
 void setup() {
   size(1920, 1080, P2D);
-
-  Ani.init(this);
-
-  for(int i = 0; i < dancers.length; i++)
-    dancers[i] = new Dancer();
 }
 
 void draw() {
@@ -170,6 +166,19 @@ void draw() {
       line(j, i - d, j, i + d);
     }
   }
+
+  if (!isSetup) {
+    if (millis() < 5000) return;
+    else {
+      Ani.init(this);
+
+      for (int i = 0; i < dancers.length; i++)
+        dancers[i] = new Dancer();
+
+      isSetup = true;
+    }
+  }
+
   for (Dancer d : dancers) {
     d.draw();
   }
