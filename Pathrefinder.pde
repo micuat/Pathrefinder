@@ -28,6 +28,7 @@ class Morph {
 
 class State {
   Dancer dancer;
+  Morph r;
   Morph tx;
   Morph ty;
   Morph sx;
@@ -39,7 +40,8 @@ class State {
     dancer = _dancer;
   }
 
-  void setup(float _tx, float _ty, float _sx, float _sy) {
+  void setup(float _r, float _tx, float _ty, float _sx, float _sy) {
+    r = new Morph(this, _r, 0.5 * PI * (int)floor(random(0, 4)));
     tx = new Morph(this, _tx, (int)floor(random(-16, 16)));
     ty = new Morph(this, _ty, (int)floor(random(-16, 16)));
     switch((int)floor(random(3))) {
@@ -49,19 +51,21 @@ class State {
       break;
     case 1:
       if (random(1) > 0.5) {
-        sx = new Morph(this, _sx, (int)floor(random(1, 4)));
+        sx = new Morph(this, _sx, (int)floor(random(1, 8)));
         sy = new Morph(this, _sy, 0);
       } else {
         sx = new Morph(this, _sx, 0);
-        sy = new Morph(this, _sy, (int)floor(random(1, 4)));
+        sy = new Morph(this, _sy, (int)floor(random(1, 8)));
       }
       break;
     default:
-      sx = new Morph(this, _sx, (int)floor(random(1, 4)));
-      sy = new Morph(this, _sy, (int)floor(random(1, 4)));
+      sx = new Morph(this, _sx, (int)floor(random(1, 8)));
+      sy = new Morph(this, _sy, (int)floor(random(1, 8)));
       break;
     }
 
+    if(r.tEnd != _r)
+      morphs.add(r);
     if(tx.tEnd != _tx)
       morphs.add(tx);
     if(ty.tEnd != _ty)
@@ -102,44 +106,53 @@ class Dancer {
     for (int i = 0; i < states.length; i++) {
       states[i] = new State(this);
     }
-    states[0].setup(0, 0, 0, 0);
+    states[0].setup(0, 0, 0, 0, 0);
   }
 
   void draw() {
+    State s = states[curState];
+    pushMatrix();
+
+    translate(s.tx.t, s.ty.t);
+    rotate(s.r.t);
+
     stroke(255);
     strokeWeight(0.25);
-    State s = states[curState];
-    point(s.tx.t + s.sx.t, s.ty.t + s.sy.t);
-    point(s.tx.t - s.sx.t, s.ty.t + s.sy.t);
-    point(s.tx.t - s.sx.t, s.ty.t - s.sy.t);
-    point(s.tx.t + s.sx.t, s.ty.t - s.sy.t);
+
+    point(+ s.sx.t, + s.sy.t);
+    point(- s.sx.t, + s.sy.t);
+    point(- s.sx.t, - s.sy.t);
+    point(+ s.sx.t, - s.sy.t);
     noFill();
     strokeWeight(0.1);
     beginShape();
-    vertex(s.tx.t + s.sx.t, s.ty.t + s.sy.t);
-    vertex(s.tx.t - s.sx.t, s.ty.t + s.sy.t);
-    vertex(s.tx.t - s.sx.t, s.ty.t - s.sy.t);
-    vertex(s.tx.t + s.sx.t, s.ty.t - s.sy.t);
+    vertex(+ s.sx.t, + s.sy.t);
+    vertex(- s.sx.t, + s.sy.t);
+    vertex(- s.sx.t, - s.sy.t);
+    vertex(+ s.sx.t, - s.sy.t);
     endShape(CLOSE);
     fill(255);
+    
+    popMatrix();
   }
 
   void onStateEnd() {
     int prevState = curState;
     curState = (curState + 1) % states.length;
     State s = states[prevState];
-    states[curState].setup(s.tx.t, s.ty.t, s.sx.t, s.sy.t);
+    states[curState].setup(s.r.t, s.tx.t, s.ty.t, s.sx.t, s.sy.t);
   }
 }
 
-Dancer[] dancers = new Dancer[1];
+Dancer[] dancers = new Dancer[8];
 
 void setup() {
   size(1920, 1080, P2D);
 
   Ani.init(this);
 
-  dancers[0] = new Dancer();
+  for(int i = 0; i < dancers.length; i++)
+    dancers[i] = new Dancer();
 }
 
 void draw() {
