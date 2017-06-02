@@ -5,25 +5,32 @@ import de.looksgood.ani.easing.*;
 
 class Morph {
   float t = 0;
-  float tEnd;
+  float tStart, tEnd;
   State state;
 
   Morph(State _state, float _tStart, float _tEnd) {
     state = _state;
-    t = _tStart;
+    t = tStart = _tStart;
     tEnd = _tEnd;
+
+    if (_tStart == _tEnd) {
+    } else {
+      state.morphs.add(this);
+    }
   }
 
   void start() {
-    Ani.to(this, 2, "t", tEnd, Ani.QUART_IN_OUT, "onStart:onStart, onEnd:onEnd");
+    if (tStart != tEnd)
+      Ani.to(this, 2, "t", tEnd, Ani.QUART_IN_OUT, "onStart:onStart, onEnd:onEnd");
   }
 
   void onStart(Ani theAni) {
   }
 
   void onEnd(Ani theAni) {
-    state.onMorphEnd();
+    state.onMorphEnd(this);
   }
+
 }
 
 class State {
@@ -38,6 +45,10 @@ class State {
 
   State(Dancer _dancer) {
     dancer = _dancer;
+  }
+
+  void setup(State _s) {
+    setup(_s.r.t, _s.tx.t, _s.ty.t, _s.sx.t, _s.sy.t);
   }
 
   void setup(float _r, float _tx, float _ty, float _sx, float _sy) {
@@ -64,20 +75,15 @@ class State {
       break;
     }
 
-    if (r.tEnd != _r)
-      morphs.add(r);
-    if (tx.tEnd != _tx)
-      morphs.add(tx);
-    if (ty.tEnd != _ty)
-      morphs.add(ty);
-    if (sx.tEnd != _sx)
-      morphs.add(sx);
-    if (sy.tEnd != _sy)
-      morphs.add(sy);
     nextMorph();
   }
 
   void nextMorph() {
+    if (morphs.size() == 0) {
+      dancer.onStateEnd(this);
+      return;
+    }
+
     Morph m;
     if (itr == null) {
       itr = morphs.iterator();
@@ -88,12 +94,11 @@ class State {
     m.start();
   }
 
-  void onMorphEnd() {
-    println(this + "end");
+  void onMorphEnd(Morph m) {
     if (itr.hasNext()) {
       nextMorph();
     } else {
-      dancer.onStateEnd();
+      dancer.onStateEnd(this);
     }
   }
 }
@@ -136,11 +141,9 @@ class Dancer {
     popMatrix();
   }
 
-  void onStateEnd() {
-    int prevState = curState;
+  void onStateEnd(State prevS) {
     curState = (curState + 1) % states.length;
-    State s = states[prevState];
-    states[curState].setup(s.r.t, s.tx.t, s.ty.t, s.sx.t, s.sy.t);
+    states[curState].setup(prevS);
   }
 }
 
