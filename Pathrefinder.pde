@@ -57,7 +57,7 @@ class State {
   }
 
   void setup(float _r, float _tx, float _ty, float _sx, float _sy) {
-    r = new Morph(this, _r, 0.5 * PI * (int)floor(random(0, 4)));
+    r = new Morph(this, _r, 0.5 * PI * (int)floor(random(0, 2)));
     tx = new Morph(this, _tx, (int)floor(random(-16, 16)));
     ty = new Morph(this, _ty, (int)floor(random(-16, 16)));
     switch((int)floor(random(3))) {
