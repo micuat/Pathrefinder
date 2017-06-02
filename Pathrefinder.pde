@@ -119,17 +119,17 @@ class Dancer {
     stroke(255);
     strokeWeight(0.25);
 
-    point(+ s.sx.t, + s.sy.t);
-    point(- s.sx.t, + s.sy.t);
-    point(- s.sx.t, - s.sy.t);
-    point(+ s.sx.t, - s.sy.t);
+    point( s.sx.t, s.sy.t);
+    point(-s.sx.t, s.sy.t);
+    point(-s.sx.t, -s.sy.t);
+    point( s.sx.t, -s.sy.t);
     noFill();
     strokeWeight(0.1);
     beginShape();
-    vertex(+ s.sx.t, + s.sy.t);
-    vertex(- s.sx.t, + s.sy.t);
-    vertex(- s.sx.t, - s.sy.t);
-    vertex(+ s.sx.t, - s.sy.t);
+    vertex( s.sx.t, s.sy.t);
+    vertex(-s.sx.t, s.sy.t);
+    vertex(-s.sx.t, -s.sy.t);
+    vertex( s.sx.t, -s.sy.t);
     endShape(CLOSE);
     fill(255);
 
