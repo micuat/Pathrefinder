@@ -146,9 +146,9 @@ class Dancer {
   }
 
   void draw() {
-    states[curState].draw(color(255, 128), -1);
+    states[curState].draw(color(255, 64), -1);
     states[curState].draw(color(255, 255), 0);
-    states[curState].draw(color(255, 128), 1);
+    states[curState].draw(color(255, 64), 1);
   }
 
   void onStateEnd(State prevS) {
@@ -170,15 +170,7 @@ void draw() {
   translate(width * 0.5, height * 0.5);
   scale(30, 30);
 
-  for (int i = -16; i <= 16; i++) {
-    for (int j = -16; j <= 16; j++) {
-      stroke(128);
-      strokeWeight(0.1);
-      float d = 0.125;
-      line(j - d, i, j + d, i);
-      line(j, i - d, j, i + d);
-    }
-  }
+  drawGrid(16, 16);
 
   if (!isSetup) {
     if (millis() < 5000) return;
@@ -194,5 +186,17 @@ void draw() {
 
   for (Dancer d : dancers) {
     d.draw();
+  }
+}
+
+void drawGrid(int x, int y) {
+  for (int i = -y; i <= y; i++) {
+    for (int j = -x; j <= x; j++) {
+      stroke(255, 128);
+      strokeWeight(0.1);
+      float d = 0.125;
+      line(j - d, i, j + d, i);
+      line(j, i - d, j, i + d);
+    }
   }
 }
