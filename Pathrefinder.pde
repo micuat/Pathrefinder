@@ -31,6 +31,11 @@ class Morph {
     state.onMorphEnd(this);
   }
 
+  float get(int tense) {
+    if (tense < 0) return tStart; // past
+    else if (tense == 0) return t; // present
+    else return tEnd; // future
+  }
 }
 
 class State {
@@ -102,26 +107,26 @@ class State {
     }
   }
 
-  void draw(color c) {
+  void draw(color c, int tense) {
     pushMatrix();
 
-    translate(tx.t, ty.t);
-    rotate(r.t);
+    translate(tx.get(tense), ty.get(tense));
+    rotate(r.get(tense));
 
     stroke(c);
     strokeWeight(0.25);
 
-    point( sx.t, sy.t);
-    point(-sx.t, sy.t);
-    point(-sx.t, -sy.t);
-    point( sx.t, -sy.t);
+    point( sx.get(tense), sy.get(tense));
+    point(-sx.get(tense), sy.get(tense));
+    point(-sx.get(tense), -sy.get(tense));
+    point( sx.get(tense), -sy.get(tense));
     noFill();
     strokeWeight(0.1);
     beginShape();
-    vertex( sx.t, sy.t);
-    vertex(-sx.t, sy.t);
-    vertex(-sx.t, -sy.t);
-    vertex( sx.t, -sy.t);
+    vertex( sx.get(tense), sy.get(tense));
+    vertex(-sx.get(tense), sy.get(tense));
+    vertex(-sx.get(tense), -sy.get(tense));
+    vertex( sx.get(tense), -sy.get(tense));
     endShape(CLOSE);
     fill(255);
 
@@ -141,7 +146,9 @@ class Dancer {
   }
 
   void draw() {
-    states[curState].draw(255);
+    states[curState].draw(color(255, 128), -1);
+    states[curState].draw(color(255, 255), 0);
+    states[curState].draw(color(255, 128), 1);
   }
 
   void onStateEnd(State prevS) {
