@@ -115,22 +115,23 @@ class State {
 
     stroke(c);
     strokeWeight(0.25);
+    drawRect(sx.get(tense), sy.get(tense), POINTS);
 
-    point( sx.get(tense), sy.get(tense));
-    point(-sx.get(tense), sy.get(tense));
-    point(-sx.get(tense), -sy.get(tense));
-    point( sx.get(tense), -sy.get(tense));
     noFill();
     strokeWeight(0.1);
-    beginShape();
-    vertex( sx.get(tense), sy.get(tense));
-    vertex(-sx.get(tense), sy.get(tense));
-    vertex(-sx.get(tense), -sy.get(tense));
-    vertex( sx.get(tense), -sy.get(tense));
-    endShape(CLOSE);
+    drawRect(sx.get(tense), sy.get(tense), QUADS);
     fill(255);
 
     popMatrix();
+  }
+
+  void drawRect(float x, float y, int mode) {
+    beginShape(mode);
+    vertex(x, y);
+    vertex(-x, y);
+    vertex(-x, -y);
+    vertex(x, -y);
+    endShape(CLOSE);
   }
 }
 
