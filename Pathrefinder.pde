@@ -80,22 +80,16 @@ class State {
       break;
     }
 
+    if (morphs.size() == 0) { // nothing to do
+      dancer.onStateEnd(this);
+      return;
+    }
+    itr = morphs.iterator();
     nextMorph();
   }
 
   void nextMorph() {
-    if (morphs.size() == 0) {
-      dancer.onStateEnd(this);
-      return;
-    }
-
-    Morph m;
-    if (itr == null) {
-      itr = morphs.iterator();
-      m = (Morph)morphs.get(0);
-    } else {
-      m = itr.next();
-    }
+    Morph m = itr.next();
     m.start();
   }
 
