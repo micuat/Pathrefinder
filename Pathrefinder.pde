@@ -101,6 +101,32 @@ class State {
       dancer.onStateEnd(this);
     }
   }
+
+  void draw(color c) {
+    pushMatrix();
+
+    translate(tx.t, ty.t);
+    rotate(r.t);
+
+    stroke(c);
+    strokeWeight(0.25);
+
+    point( sx.t, sy.t);
+    point(-sx.t, sy.t);
+    point(-sx.t, -sy.t);
+    point( sx.t, -sy.t);
+    noFill();
+    strokeWeight(0.1);
+    beginShape();
+    vertex( sx.t, sy.t);
+    vertex(-sx.t, sy.t);
+    vertex(-sx.t, -sy.t);
+    vertex( sx.t, -sy.t);
+    endShape(CLOSE);
+    fill(255);
+
+    popMatrix();
+  }
 }
 
 class Dancer {
@@ -115,30 +141,7 @@ class Dancer {
   }
 
   void draw() {
-    State s = states[curState];
-    pushMatrix();
-
-    translate(s.tx.t, s.ty.t);
-    rotate(s.r.t);
-
-    stroke(255);
-    strokeWeight(0.25);
-
-    point( s.sx.t, s.sy.t);
-    point(-s.sx.t, s.sy.t);
-    point(-s.sx.t, -s.sy.t);
-    point( s.sx.t, -s.sy.t);
-    noFill();
-    strokeWeight(0.1);
-    beginShape();
-    vertex( s.sx.t, s.sy.t);
-    vertex(-s.sx.t, s.sy.t);
-    vertex(-s.sx.t, -s.sy.t);
-    vertex( s.sx.t, -s.sy.t);
-    endShape(CLOSE);
-    fill(255);
-
-    popMatrix();
+    states[curState].draw(255);
   }
 
   void onStateEnd(State prevS) {
