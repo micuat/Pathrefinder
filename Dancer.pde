@@ -3,9 +3,7 @@ class Dancer {
   int curState = 0;
 
   Dancer() {
-    for (int i = 0; i < states.length; i++) {
-      states[i] = new State(this);
-    }
+    states[0] = randomState();
     states[0].setup(0, 0, 0, 0, 0, 0);
   }
 
@@ -17,6 +15,26 @@ class Dancer {
 
   void onStateEnd(State prevS) {
     curState = (curState + 1) % states.length;
+    states[curState] = randomState();
     states[curState].setup(prevS);
+  }
+
+  State randomState() {
+    State s;
+    switch((int)floor(random(4))) {
+    case 0:
+      s = new PointState(this);
+      break;
+    case 1:
+      s = new LineState(this);
+      break;
+    case 2:
+      s = new QuadState(this);
+      break;
+    default:
+      s = new TriState(this);
+      break;
+    }
+    return s;
   }
 }
