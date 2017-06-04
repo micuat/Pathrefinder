@@ -4,7 +4,7 @@ class Dancer {
 
   Dancer() {
     states[0] = randomState();
-    states[0].setup(0, 0, 0, 0, 0, 0);
+    states[0].setup(null);
   }
 
   void draw() {

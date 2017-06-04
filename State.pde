@@ -15,11 +15,11 @@ abstract class State {
   }
 
   void setup(State _s) {
-    setup(_s.r.t, _s.tx.t, _s.ty.t, _s.sx.t, _s.sy.t, _s.tri.t);
-  }
-
-  void setup(float _r, float _tx, float _ty, float _sx, float _sy, float _tri) {
-    setupMorphs(_r, _tx, _ty, _sx, _sy, _tri);
+    if (_s == null) {
+      setupMorphs(0, 0, 0, 0, 0, 0);
+    } else {
+      setupMorphs(_s.r.t, _s.tx.t, _s.ty.t, _s.sx.t, _s.sy.t, _s.tri.t);
+    }
 
     if (morphs.size() == 0) { // nothing to do
       dancer.onStateEnd(this);
