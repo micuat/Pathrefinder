@@ -102,13 +102,8 @@ class LineState extends State {
     r = new Morph(this, _r, 0.5 * PI * (int)floor(random(0, 2)));
     tx = new Morph(this, _tx, (int)floor(random(-16, 16)));
     ty = new Morph(this, _ty, (int)floor(random(-16, 16)));
-    if (random(1) > 0.5) {
-      sx = new Morph(this, _sx, (int)floor(random(1, 8)));
-      sy = new Morph(this, _sy, 0);
-    } else {
-      sx = new Morph(this, _sx, 0);
-      sy = new Morph(this, _sy, (int)floor(random(1, 8)));
-    }
+    sx = new Morph(this, _sx, (int)floor(random(1, 8)));
+    sy = new Morph(this, _sy, 0);
     tri = new Morph(this, _tri, 0);
 
     if (morphs.size() == 0) { // nothing to do
