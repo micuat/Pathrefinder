@@ -3,20 +3,30 @@ class Morph {
   float tStart, tEnd;
   State state;
 
+  Morph(State _state, float _tStart, float _tEnd, float _t) {
+    state = _state;
+    tStart = _tStart;
+    tEnd = _tEnd;
+    t = _t;
+
+    state.morphs.add(this);
+  }
+
   Morph(State _state, float _tStart, float _tEnd) {
     state = _state;
     t = tStart = _tStart;
     tEnd = _tEnd;
 
-    if (_tStart == _tEnd) {
-    } else {
-      state.morphs.add(this);
-    }
+    state.morphs.add(this);
   }
 
   void start() {
+    t = tStart;
     if (tStart != tEnd)
       Ani.to(this, 2, "t", tEnd, Ani.QUART_IN_OUT, "onStart:onStart, onEnd:onEnd");
+    else {
+      state.onMorphEnd(this);
+    }
   }
 
   void onStart(Ani theAni) {

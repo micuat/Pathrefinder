@@ -89,12 +89,17 @@ class PointState extends State {
       _sy = _s.sy.t;
       _tri = _s.tri.t;
     }
-    r = new Morph(this, _r, _r);
+    float rEnd = 0;
+    if (_s == null || _s.getClass().getName().equals("Pathrefinder$PointState")) {
+      r = new Morph(this, rEnd, rEnd);
+    } else {
+      r = new Morph(this, _r, rEnd);
+    }
     tx = new Morph(this, _tx, (int)floor(random(-16, 16)));
     ty = new Morph(this, _ty, (int)floor(random(-16, 16)));
     sx = new Morph(this, _sx, 0);
     sy = new Morph(this, _sy, 0);
-    tri = new Morph(this, _tri, 0);
+    tri = new Morph(this, 0, 0, _tri);
 
     if (morphs.size() == 0) { // nothing to do
       dancer.onStateEnd(this);
@@ -127,7 +132,12 @@ class LineState extends State {
       _sy = _s.sy.t;
       _tri = _s.tri.t;
     }
-    r = new Morph(this, _r, 0.5 * PI * (int)floor(random(0, 2)));
+    float rEnd = 0.5 * PI * (int)floor(random(0, 2));
+    if (_s == null || _s.getClass().getName().equals("Pathrefinder$PointState")) {
+      r = new Morph(this, rEnd, rEnd);
+    } else {
+      r = new Morph(this, _r, rEnd);
+    }
     tx = new Morph(this, _tx, (int)floor(random(-16, 16)));
     ty = new Morph(this, _ty, (int)floor(random(-16, 16)));
     sx = new Morph(this, _sx, (int)floor(random(1, 8)));
@@ -164,7 +174,12 @@ class QuadState extends State {
       _sy = _s.sy.t;
       _tri = _s.tri.t;
     }
-    r = new Morph(this, _r, 0.5 * PI * (int)floor(random(0, 2)));
+    float rEnd = 0.5 * PI * (int)floor(random(0, 2));
+    if (_s == null || _s.getClass().getName().equals("Pathrefinder$PointState")) {
+      r = new Morph(this, rEnd, rEnd);
+    } else {
+      r = new Morph(this, _r, rEnd);
+    }
     tx = new Morph(this, _tx, (int)floor(random(-16, 16)));
     ty = new Morph(this, _ty, (int)floor(random(-16, 16)));
     sx = new Morph(this, _sx, (int)floor(random(1, 8)));
@@ -202,7 +217,13 @@ class TriState extends State {
       _sy = _s.sy.t;
       _tri = _s.tri.t;
     }
-    r = new Morph(this, _r, 0.5 * PI * (int)floor(random(0, 4))); // allow 180, 270 as they are not symmetric
+    // allow 180, 270 as they are not symmetric
+    float rEnd = 0.5 * PI * (int)floor(random(0, 4));
+    if (_s == null || _s.getClass().getName().equals("Pathrefinder$PointState")) {
+      r = new Morph(this, rEnd, rEnd);
+    } else {
+      r = new Morph(this, _r, rEnd);
+    }
     tx = new Morph(this, _tx, (int)floor(random(-16, 16)));
     ty = new Morph(this, _ty, (int)floor(random(-16, 16)));
     sx = new Morph(this, _sx, (int)floor(random(1, 8)));
