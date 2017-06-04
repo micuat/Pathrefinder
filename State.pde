@@ -77,7 +77,7 @@ class PointState extends State {
   }
 
   void setupMorphs(float _r, float _tx, float _ty, float _sx, float _sy, float _tri) {
-    r = new Morph(this, _r, 0.5 * PI * (int)floor(random(0, 2)));
+    r = new Morph(this, _r, _r);
     tx = new Morph(this, _tx, (int)floor(random(-16, 16)));
     ty = new Morph(this, _ty, (int)floor(random(-16, 16)));
     sx = new Morph(this, _sx, 0);
