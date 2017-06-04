@@ -15,11 +15,7 @@ abstract class State {
   }
 
   void setup(State _s) {
-    if (_s == null) {
-      setupMorphs(0, 0, 0, 0, 0, 0);
-    } else {
-      setupMorphs(_s.r.t, _s.tx.t, _s.ty.t, _s.sx.t, _s.sy.t, _s.tri.t);
-    }
+    setupMorphs(_s);
 
     if (morphs.size() == 0) { // nothing to do
       dancer.onStateEnd(this);
@@ -29,7 +25,7 @@ abstract class State {
     nextMorph();
   }
 
-  abstract void setupMorphs(float _r, float _tx, float _ty, float _sx, float _sy, float _tri);
+  abstract void setupMorphs(State _s);
   void nextMorph() {
     Morph m = itr.next();
     m.start();
@@ -76,7 +72,23 @@ class PointState extends State {
     super(_dancer);
   }
 
-  void setupMorphs(float _r, float _tx, float _ty, float _sx, float _sy, float _tri) {
+  void setupMorphs(State _s) {
+    float _r, _tx, _ty, _sx, _sy, _tri;
+    if (_s == null) {
+      _r = 0;
+      _tx = 0;
+      _ty = 0;
+      _sx = 0;
+      _sy = 0;
+      _tri = 0;
+    } else {
+      _r = _s.r.t;
+      _tx = _s.tx.t;
+      _ty = _s.ty.t;
+      _sx = _s.sx.t;
+      _sy = _s.sy.t;
+      _tri = _s.tri.t;
+    }
     r = new Morph(this, _r, _r);
     tx = new Morph(this, _tx, (int)floor(random(-16, 16)));
     ty = new Morph(this, _ty, (int)floor(random(-16, 16)));
@@ -98,7 +110,23 @@ class LineState extends State {
     super(_dancer);
   }
 
-  void setupMorphs(float _r, float _tx, float _ty, float _sx, float _sy, float _tri) {
+  void setupMorphs(State _s) {
+    float _r, _tx, _ty, _sx, _sy, _tri;
+    if (_s == null) {
+      _r = 0;
+      _tx = 0;
+      _ty = 0;
+      _sx = 0;
+      _sy = 0;
+      _tri = 0;
+    } else {
+      _r = _s.r.t;
+      _tx = _s.tx.t;
+      _ty = _s.ty.t;
+      _sx = _s.sx.t;
+      _sy = _s.sy.t;
+      _tri = _s.tri.t;
+    }
     r = new Morph(this, _r, 0.5 * PI * (int)floor(random(0, 2)));
     tx = new Morph(this, _tx, (int)floor(random(-16, 16)));
     ty = new Morph(this, _ty, (int)floor(random(-16, 16)));
@@ -119,7 +147,23 @@ class QuadState extends State {
   QuadState(Dancer _dancer) {
     super(_dancer);
   }
-  void setupMorphs(float _r, float _tx, float _ty, float _sx, float _sy, float _tri) {
+  void setupMorphs(State _s) {
+    float _r, _tx, _ty, _sx, _sy, _tri;
+    if (_s == null) {
+      _r = 0;
+      _tx = 0;
+      _ty = 0;
+      _sx = 0;
+      _sy = 0;
+      _tri = 0;
+    } else {
+      _r = _s.r.t;
+      _tx = _s.tx.t;
+      _ty = _s.ty.t;
+      _sx = _s.sx.t;
+      _sy = _s.sy.t;
+      _tri = _s.tri.t;
+    }
     r = new Morph(this, _r, 0.5 * PI * (int)floor(random(0, 2)));
     tx = new Morph(this, _tx, (int)floor(random(-16, 16)));
     ty = new Morph(this, _ty, (int)floor(random(-16, 16)));
@@ -141,7 +185,23 @@ class TriState extends State {
     super(_dancer);
   }
 
-  void setupMorphs(float _r, float _tx, float _ty, float _sx, float _sy, float _tri) {
+  void setupMorphs(State _s) {
+    float _r, _tx, _ty, _sx, _sy, _tri;
+    if (_s == null) {
+      _r = 0;
+      _tx = 0;
+      _ty = 0;
+      _sx = 0;
+      _sy = 0;
+      _tri = 0;
+    } else {
+      _r = _s.r.t;
+      _tx = _s.tx.t;
+      _ty = _s.ty.t;
+      _sx = _s.sx.t;
+      _sy = _s.sy.t;
+      _tri = _s.tri.t;
+    }
     r = new Morph(this, _r, 0.5 * PI * (int)floor(random(0, 4))); // allow 180, 270 as they are not symmetric
     tx = new Morph(this, _tx, (int)floor(random(-16, 16)));
     ty = new Morph(this, _ty, (int)floor(random(-16, 16)));
