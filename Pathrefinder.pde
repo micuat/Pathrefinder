@@ -4,7 +4,7 @@ import de.looksgood.ani.*;
 import de.looksgood.ani.easing.*;
 
 Grid grid = new Grid(16, 16);
-Dancer[] dancers = new Dancer[0];
+Dancer[] dancers = new Dancer[1];
 boolean isSetup = false;
 
 void setup() {
