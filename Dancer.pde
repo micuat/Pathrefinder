@@ -17,10 +17,6 @@ class Dancer {
   void draw() {
     State s = states[curState];
 
-    s.draw(color(255, 64), -1);
-    s.draw(color(255, 255), 0);
-    s.draw(color(255, 64), 1);
-
     if (frameCount % 4 == 0) {
       trace[curTrace + 0].x = s.tx.t + (map(s.tri.t, 0, 1, s.sx.t, 0) * cos(s.r.t) - map(s.tri.t, 0, 1, s.sy.t, 0) * sin(s.r.t));
       trace[curTrace + 0].y = s.ty.t + (map(s.tri.t, 0, 1, s.sx.t, 0) * sin(s.r.t) + map(s.tri.t, 0, 1, s.sy.t, 0) * cos(s.r.t));
@@ -38,6 +34,10 @@ class Dancer {
       vertex(v.x, v.y);
     }
     endShape(CLOSE);
+
+    s.draw(color(255, 64), -1);
+    s.draw(color(255, 255), 0);
+    s.draw(color(255, 64), 1);
   }
 
   void onStateEnd(State prevS) {
