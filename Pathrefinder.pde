@@ -7,31 +7,45 @@ import de.looksgood.ani.easing.*;
 
 ControlP5 cp5;
 
-Grid grid = new Grid(16, 16);
+Grid grid = new Grid(12, 12);
 Dancer[] dancers = new Dancer[1];
 boolean isSetup = false;
 
 void setup() {
   size(1920, 1080, P2D);
-  cp5 = new ControlP5(this);
+
+  PFont f = createFont("SourceCodePro-Regular.ttf", 20);
+  cp5 = new ControlP5(this, f);
+  cp5.begin(1350, 200);
   cp5.addSlider("r")
-    .setPosition(100, 140)
-    .setRange(0, 1);
+    .setRange(0, 1)
+    .setHeight(15)
+    .linebreak();
   cp5.addSlider("tx")
-    .setPosition(100, 170)
-    .setRange(0, 1);
+    .setRange(0, 1)
+    .setHeight(15)
+    .linebreak();
   cp5.addSlider("ty")
-    .setPosition(100, 200)
-    .setRange(0, 1);
+    .setRange(0, 1)
+    .setHeight(15)
+    .linebreak();
   cp5.addSlider("sx")
-    .setPosition(100, 230)
-    .setRange(0, 1);
+    .setRange(0, 1)
+    .setHeight(15)
+    .linebreak();
   cp5.addSlider("sy")
-    .setPosition(100, 260)
-    .setRange(0, 1);
+    .setRange(0, 1)
+    .setHeight(15)
+    .linebreak();
   cp5.addSlider("tri")
-    .setPosition(100, 290)
-    .setRange(0, 1);
+    .setRange(0, 1)
+    .setHeight(15)
+    .linebreak();
+  cp5.end();
+  cp5.addTextarea("score")
+    .setPosition(1350, 550)
+    .setWidth(300)
+    .setHeight(500);
 }
 
 void draw() {

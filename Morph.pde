@@ -9,7 +9,8 @@ class Morph {
     tEnd = _tEnd;
     t = _t;
 
-    state.morphs.add(this);
+    if (tStart != tEnd)
+      state.morphs.add(this);
   }
 
   Morph(State _state, float _tStart, float _tEnd) {
@@ -17,7 +18,8 @@ class Morph {
     t = tStart = _tStart;
     tEnd = _tEnd;
 
-    state.morphs.add(this);
+    if (tStart != tEnd)
+      state.morphs.add(this);
   }
 
   void start() {

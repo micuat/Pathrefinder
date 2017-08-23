@@ -22,6 +22,16 @@ abstract class State {
       return;
     }
 
+    Textarea ta = (Textarea)cp5.get("score");
+    String score = "score: " + str(morphs.size());
+    score += "\n  r: " + nfp(r.tStart, 2, 3) + " -> " + nfp(r.tEnd, 2, 3);
+    score += "\n tx: " + nfp(tx.tStart, 2, 3) + " -> " + nfp(tx.tEnd, 2, 3);
+    score += "\n ty: " + nfp(ty.tStart, 2, 3) + " -> " + nfp(ty.tEnd, 2, 3);
+    score += "\n sx: " + nfp(sx.tStart, 2, 3) + " -> " + nfp(sx.tEnd, 2, 3);
+    score += "\n sy: " + nfp(sy.tStart, 2, 3) + " -> " + nfp(sy.tEnd, 2, 3);
+    score += "\ntri: " + nfp(tri.tStart, 2, 3) + " -> " + nfp(tri.tEnd, 2, 3);
+    ta.setText(score);
+
     itr = morphs.iterator();
     nextMorph();
   }
