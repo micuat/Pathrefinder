@@ -95,8 +95,8 @@ class PointState extends State {
     } else {
       r = new Morph(this, _r, rEnd);
     }
-    tx = new Morph(this, _tx, (int)floor(random(-16, 16)));
-    ty = new Morph(this, _ty, (int)floor(random(-16, 16)));
+    tx = new Morph(this, _tx, (int)floor(random(-grid.nx, grid.nx)));
+    ty = new Morph(this, _ty, (int)floor(random(-grid.ny, grid.ny)));
     sx = new Morph(this, _sx, 0);
     sy = new Morph(this, _sy, 0);
     tri = new Morph(this, 0, 0, _tri);
@@ -138,9 +138,9 @@ class LineState extends State {
     } else {
       r = new Morph(this, _r, rEnd);
     }
-    tx = new Morph(this, _tx, (int)floor(random(-16, 16)));
-    ty = new Morph(this, _ty, (int)floor(random(-16, 16)));
-    sx = new Morph(this, _sx, (int)floor(random(1, 8)));
+    tx = new Morph(this, _tx, (int)floor(random(-grid.nx, grid.nx)));
+    ty = new Morph(this, _ty, (int)floor(random(-grid.ny, grid.ny)));
+    sx = new Morph(this, _sx, (int)floor(random(1, grid.nx / 2)));
     sy = new Morph(this, _sy, 0);
     tri = new Morph(this, _tri, 0);
 
@@ -180,10 +180,10 @@ class QuadState extends State {
     } else {
       r = new Morph(this, _r, rEnd);
     }
-    tx = new Morph(this, _tx, (int)floor(random(-16, 16)));
-    ty = new Morph(this, _ty, (int)floor(random(-16, 16)));
-    sx = new Morph(this, _sx, (int)floor(random(1, 8)));
-    sy = new Morph(this, _sy, (int)floor(random(1, 8)));
+    tx = new Morph(this, _tx, (int)floor(random(-grid.nx, grid.nx)));
+    ty = new Morph(this, _ty, (int)floor(random(-grid.ny, grid.ny)));
+    sx = new Morph(this, _sx, (int)floor(random(1, grid.nx / 2)));
+    sy = new Morph(this, _sy, (int)floor(random(1, grid.ny / 2)));
     tri = new Morph(this, _tri, 0);
 
     if (morphs.size() == 0) { // nothing to do
@@ -224,10 +224,10 @@ class TriState extends State {
     } else {
       r = new Morph(this, _r, rEnd);
     }
-    tx = new Morph(this, _tx, (int)floor(random(-16, 16)));
-    ty = new Morph(this, _ty, (int)floor(random(-16, 16)));
-    sx = new Morph(this, _sx, (int)floor(random(1, 8)));
-    sy = new Morph(this, _sy, (int)floor(random(1, 8)));
+    tx = new Morph(this, _tx, (int)floor(random(-grid.nx, grid.nx)));
+    ty = new Morph(this, _ty, (int)floor(random(-grid.ny, grid.ny)));
+    sx = new Morph(this, _sx, (int)floor(random(1, grid.nx / 2)));
+    sy = new Morph(this, _sy, (int)floor(random(1, grid.ny / 2)));
     tri = new Morph(this, _tri, 1);
 
     if (morphs.size() == 0) { // nothing to do
