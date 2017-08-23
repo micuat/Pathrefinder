@@ -43,6 +43,6 @@ class Morph {
   }
 
   float p() {
-    return (t - tStart) / (tEnd - tStart);
+    return (t - tStart) / (tEnd - tStart + 0.001);
   }
 }

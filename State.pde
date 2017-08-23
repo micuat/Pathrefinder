@@ -21,6 +21,7 @@ abstract class State {
       dancer.onStateEnd(this);
       return;
     }
+
     itr = morphs.iterator();
     nextMorph();
   }
@@ -57,26 +58,12 @@ abstract class State {
     popMatrix();
 
     if (tense == 0) {
-      pushMatrix();
-
-      translate(grid.nx + 3, -3);
-      noStroke();
-      fill(255, 50);
-      rect(0, 0, 3, 0.5);
-      rect(0, 1, 3, 0.5);
-      rect(0, 2, 3, 0.5);
-      rect(0, 3, 3, 0.5);
-      rect(0, 4, 3, 0.5);
-      rect(0, 5, 3, 0.5);
-
-      fill(255);
-      rect(0, 0, r.p() * 3, 0.5);
-      rect(0, 1, tx.p() * 3, 0.5);
-      rect(0, 2, ty.p() * 3, 0.5);
-      rect(0, 3, sx.p() * 3, 0.5);
-      rect(0, 4, sy.p() * 3, 0.5);
-      rect(0, 5, tri.p() * 3, 0.5);
-      popMatrix();
+      cp5.get("r").setValue(r.p());
+      cp5.get("tx").setValue(tx.p());
+      cp5.get("ty").setValue(ty.p());
+      cp5.get("sx").setValue(sx.p());
+      cp5.get("sy").setValue(sy.p());
+      cp5.get("tri").setValue(tri.p());
     }
   }
 
