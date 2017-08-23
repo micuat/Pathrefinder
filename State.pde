@@ -55,6 +55,29 @@ abstract class State {
     fill(255);
 
     popMatrix();
+
+    if (tense == 0) {
+      pushMatrix();
+
+      translate(grid.nx + 1, 0);
+      noStroke();
+      fill(255, 50);
+      rect(0, 0, 3, 0.5);
+      rect(0, 1, 3, 0.5);
+      rect(0, 2, 3, 0.5);
+      rect(0, 3, 3, 0.5);
+      rect(0, 4, 3, 0.5);
+      rect(0, 5, 3, 0.5);
+
+      fill(255);
+      rect(0, 0, (r.get(0) - r.get(-1)) / (r.get(1) - r.get(-1)) * 3, 0.5);
+      rect(0, 1, (tx.get(0) - tx.get(-1)) / (tx.get(1) - tx.get(-1)) * 3, 0.5);
+      rect(0, 2, (ty.get(0) - ty.get(-1)) / (ty.get(1) - ty.get(-1)) * 3, 0.5);
+      rect(0, 3, (sx.get(0) - sx.get(-1)) / (sx.get(1) - sx.get(-1)) * 3, 0.5);
+      rect(0, 4, (sy.get(0) - sy.get(-1)) / (sy.get(1) - sy.get(-1)) * 3, 0.5);
+      rect(0, 5, (tri.get(0) - tri.get(-1)) / (tri.get(1) - tri.get(-1)) * 3, 0.5);
+      popMatrix();
+    }
   }
 
   void drawRect(float x, float y, float tri, int mode) {
