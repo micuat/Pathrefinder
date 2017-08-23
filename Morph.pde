@@ -41,4 +41,8 @@ class Morph {
     else if (tense == 0) return t; // present
     else return tEnd; // future
   }
+
+  float p() {
+    return (t - tStart) / (tEnd - tStart);
+  }
 }
