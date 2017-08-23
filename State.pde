@@ -95,11 +95,11 @@ class PointState extends State {
     } else {
       r = new Morph(this, _r, rEnd);
     }
+    tri = new Morph(this, _tri, 0); // TODO: I don't like this to be in the beginning
     tx = new Morph(this, _tx, (int)floor(random(-grid.nx, grid.nx)));
     ty = new Morph(this, _ty, (int)floor(random(-grid.ny, grid.ny)));
     sx = new Morph(this, _sx, 0);
     sy = new Morph(this, _sy, 0);
-    tri = new Morph(this, 0, 0, _tri);
 
     if (morphs.size() == 0) { // nothing to do
       dancer.onStateEnd(this);
