@@ -58,7 +58,7 @@ void draw() {
   grid.draw();
 
   if (!isSetup) {
-    if (millis() < 5000) {
+    if (millis() < 5000*2) {
     } else {
       Ani.init(this);
 
@@ -76,4 +76,8 @@ void draw() {
   }
 
   popMatrix();
+
+  if (key == ' ') {
+    saveFrame("######.png");
+  }
 }
