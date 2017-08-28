@@ -32,7 +32,8 @@ abstract class State {
     score += "\ntri: " + nfp(tri.tStart, 2, 3) + " -> " + nfp(tri.tEnd, 2, 3);
     ta.setText(score);
 
-    score = str(millis() * 0.001) + " r: " + nfp(r.tStart, 2, 3) + " -> " + nfp(r.tEnd, 2, 3);
+    Date d = new Date();
+    score = str(int(d.getTime() / 1000)) + "." + str(int(d.getTime() % 1000)) + " r: " + nfp(r.tStart, 2, 3) + " -> " + nfp(r.tEnd, 2, 3);
     score += " tx: " + nfp(tx.tStart, 2, 3) + " -> " + nfp(tx.tEnd, 2, 3);
     score += " ty: " + nfp(ty.tStart, 2, 3) + " -> " + nfp(ty.tEnd, 2, 3);
     score += " sx: " + nfp(sx.tStart, 2, 3) + " -> " + nfp(sx.tEnd, 2, 3);
