@@ -6,6 +6,8 @@ import controlP5.*;
 import de.looksgood.ani.*;
 import de.looksgood.ani.easing.*;
 
+PrintWriter scoreLog, motionLog;
+
 ControlP5 cp5;
 
 Grid grid = new Grid(12, 12);
@@ -14,6 +16,11 @@ boolean isSetup = false;
 
 void setup() {
   size(1920, 1080, P2D);
+  frameRate(30);
+
+  String d = nf(year(), 4) + "-" + nf(month(), 2) + "-" + nf(day(), 2) + "-" + nf(hour(), 2) + "-" + nf(minute(), 2) + "-" + nf(second(), 2);
+  scoreLog = createWriter("log/" + d + "-score.txt");
+  motionLog = createWriter("log/" + d + "-motion.txt");
 
   PFont f = createFont("SourceCodePro-Regular.ttf", 20);
   cp5 = new ControlP5(this, f);
@@ -80,5 +87,16 @@ void draw() {
 
   if (key == ' ') {
     saveFrame("######.png");
+  }
+}
+
+void keyPressed() {
+  if (key == ESC) {
+    key = 0;
+    scoreLog.flush();
+    scoreLog.close();
+    motionLog.flush();
+    motionLog.close();
+    exit();
   }
 }

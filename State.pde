@@ -6,6 +6,7 @@ abstract class State {
   Morph sx;
   Morph sy;
   Morph tri;
+  int count;
 
   ArrayList morphs = new ArrayList<Morph>();
   Iterator<Morph> itr;
@@ -15,6 +16,7 @@ abstract class State {
   }
 
   void setup(State _s) {
+    count = 0;
     setupMorphs(_s);
 
     if (morphs.size() == 0) { // nothing to do
@@ -33,7 +35,7 @@ abstract class State {
     ta.setText(score);
 
     Date d = new Date();
-    score = str(int(d.getTime() / 1000)) + "." + str(int(d.getTime() % 1000)) + " r: " + nfp(r.tStart, 2, 3) + " -> " + nfp(r.tEnd, 2, 3);
+    score = (d.getTime() / 1000L) + "." + nf(int(d.getTime() % 1000L), 3) + " r: " + nfp(r.tStart, 2, 3) + " -> " + nfp(r.tEnd, 2, 3);
     score += " tx: " + nfp(tx.tStart, 2, 3) + " -> " + nfp(tx.tEnd, 2, 3);
     score += " ty: " + nfp(ty.tStart, 2, 3) + " -> " + nfp(ty.tEnd, 2, 3);
     score += " sx: " + nfp(sx.tStart, 2, 3) + " -> " + nfp(sx.tEnd, 2, 3);
@@ -41,6 +43,7 @@ abstract class State {
     score += " tri: " + nfp(tri.tStart, 2, 3) + " -> " + nfp(tri.tEnd, 2, 3);
     score += "\n";
     print(score);
+    scoreLog.print(score);
 
     itr = morphs.iterator();
     nextMorph();
@@ -84,6 +87,19 @@ abstract class State {
       cp5.get("sx").setValue(sx.p());
       cp5.get("sy").setValue(sy.p());
       cp5.get("tri").setValue(tri.p());
+
+      Date d = new Date();
+      String motion;
+      motion = (d.getTime() / 1000L) + "." + nf(int(d.getTime() % 1000L), 3);
+      motion += " count: " + nf(count++, 4);
+      motion += " r: " + nfp(r.p(), 2, 3) + " -> " + nfp(r.tEnd, 2, 3);
+      motion += " tx: " + nfp(tx.p(), 2, 3) + " -> " + nfp(tx.tEnd, 2, 3);
+      motion += " ty: " + nfp(ty.p(), 2, 3) + " -> " + nfp(ty.tEnd, 2, 3);
+      motion += " sx: " + nfp(sx.p(), 2, 3) + " -> " + nfp(sx.tEnd, 2, 3);
+      motion += " sy: " + nfp(sy.p(), 2, 3) + " -> " + nfp(sy.tEnd, 2, 3);
+      motion += " tri: " + nfp(tri.p(), 2, 3) + " -> " + nfp(tri.tEnd, 2, 3);
+      motion += "\n";
+      motionLog.print(motion);
     }
   }
 
