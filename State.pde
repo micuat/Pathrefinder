@@ -91,13 +91,13 @@ abstract class State {
       Date d = new Date();
       String motion;
       motion = (d.getTime() / 1000L) + "." + nf(int(d.getTime() % 1000L), 3);
-      motion += " count: " + nf(count++, 4);
-      motion += " r: " + nfp(r.p(), 2, 3) + " -> " + nfp(r.tEnd, 2, 3);
-      motion += " tx: " + nfp(tx.p(), 2, 3) + " -> " + nfp(tx.tEnd, 2, 3);
-      motion += " ty: " + nfp(ty.p(), 2, 3) + " -> " + nfp(ty.tEnd, 2, 3);
-      motion += " sx: " + nfp(sx.p(), 2, 3) + " -> " + nfp(sx.tEnd, 2, 3);
-      motion += " sy: " + nfp(sy.p(), 2, 3) + " -> " + nfp(sy.tEnd, 2, 3);
-      motion += " tri: " + nfp(tri.p(), 2, 3) + " -> " + nfp(tri.tEnd, 2, 3);
+      motion += " " + nf(count++, 4);
+      motion += " " + nfp(r.get(0), 2, 3);
+      motion += " " + nfp(tx.get(0), 2, 3);
+      motion += " " + nfp(ty.get(0), 2, 3);
+      motion += " " + nfp(sx.get(0), 2, 3);
+      motion += " " + nfp(sy.get(0), 2, 3);
+      motion += " " + nfp(tri.get(0), 2, 3);
       motion += "\n";
       motionLog.print(motion);
     }
